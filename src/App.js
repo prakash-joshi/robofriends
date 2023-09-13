@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import CardList from "./Component/CardList";
-import { robots } from "./Component/robotsData";
 import SearchBox from "./Component/SearchBox";
 import "./App.css"
 
@@ -8,7 +7,7 @@ export class App extends Component {
   constructor() {
     super();
     this.state = {
-      robots: robots,
+      robots: [],
       searchfield: "",
     };
   }
@@ -17,9 +16,15 @@ export class App extends Component {
     this.setState({ searchfield: event.target.value, });
   };
 
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(users => this.setState({ robots: users }));
+  }
+
   render() {
     const filteredRobots = this.state.robots.filter((robots) => {
-      return robots.username.toLowerCase().includes(this.state.searchfield.toLowerCase());
+      return robots.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
     });
     return (
       <Fragment>
