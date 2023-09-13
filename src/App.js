@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import CardList from "./Component/CardList";
 import SearchBox from "./Component/SearchBox";
 import "./App.css"
+import Scroll from "./Component/Scroll";
 
 export class App extends Component {
   constructor() {
@@ -31,7 +32,9 @@ export class App extends Component {
         <div className="tc">
           <h1 className="f1">Robo Friends</h1>
           <SearchBox searchChange={this.onSearchChange} />
-          <CardList robots={filteredRobots} />
+          <Scroll>
+            <CardList robots={filteredRobots} />
+          </Scroll>
         </div>
       </Fragment>
     );
